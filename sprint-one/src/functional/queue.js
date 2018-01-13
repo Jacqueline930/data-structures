@@ -10,7 +10,6 @@ var Queue = function(){
   };
 
   someInstance.dequeue = function(){
-    //same as return queue.shift();
     var val = storage[nextUp];
     delete storage[nextUp];
     nextUp++;
