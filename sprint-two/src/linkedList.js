@@ -22,7 +22,7 @@ var LinkedList = function() {
 
   list.contains = function(target) {
     var curNode = list.head;
-    while(curNode != null) {
+    while(curNode) {
       if (curNode.value === target) {
         return true;
       } else {
