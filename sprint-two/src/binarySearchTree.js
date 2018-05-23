@@ -1,39 +1,62 @@
 var BinarySearchTree = function(value) {
-  function Node(value) {
-  this.data = value;
-  this.left = null;
-  this.right = null;
-}
+  var binaryTree = Object.create(BinarySearchTree.prototype);
+  binaryTree.left = null;
+  binaryTree.right = null;
+  binaryTree.value = value;
 
-function BinarySearchTree() {
-  this.root = null;
-}
-
-BinarySearchTree.prototype.add = function(value) {
-  var node = new Node(value);
-  if(!this.root) {
-    this.root = node;
-  } else {
-    var current = this.root;
-    while(current) {
-      if(node.data < current.data) {
-        if(!current.left) {
-          current.left = node;
-          break;
-        }
-        current = current.left;
-      } else if (node.data > current.data) {
-        if(!current.right) {
-          current.right = node;
-          break;
-        }
-        current = current.right;
-      } else {
-        break;
-      }
-    }
-  }
+  return binaryTree;
 };
+
+BinarySearchTree.prototype.insert = function(value) {
+  var childTree = BinarySearchTree(value);
+
+  var test = function(child, node) {
+    if (child.value < node.value) {
+      if (node.left === null) {
+        node.left = child;
+      } else {
+        return test(child, node.left);
+      }
+    } else {
+      if (node.right === null) {
+        node.right = child;
+      } else {
+        return test(child, node.right);
+      }
+    };
+  };
+
+  test(childTree, this);
+};
+
+BinarySearchTree.prototype.contains = function(target) {
+  if (this.value === target) {
+    return true;
+  } else if (target < this.value) {
+    if (this.left === null) {
+      return false;
+    } else {
+      return this.left.contains(target);
+    }
+  } else {
+    if (this.right === null) {
+      return false;
+    } else {
+      return this.right.contains(target);
+    }
+  };
+};
+
+BinarySearchTree.prototype.depthFirstLog = function(cb) {
+  cb(this.value);
+
+  if (this.left) {
+    this.left.depthFirstLog(cb);
+  };
+
+  if (this.right) {
+    this.right.depthFirstLog(cb);
+  };
 };
 
 

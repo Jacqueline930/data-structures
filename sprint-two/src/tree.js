@@ -13,7 +13,7 @@ treeMethods.addChild = function(value) {
   var newChild = Tree(value);
   this.children.push(newChild);
 };
-
+https://codeburst.io/js-data-structures-linked-list-3ed4d63e6571
 treeMethods.contains = function(target) {
   if (this.value === target) {
     return true;
