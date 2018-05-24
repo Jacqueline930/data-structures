@@ -10,23 +10,23 @@ var BinarySearchTree = function(value) {
 BinarySearchTree.prototype.insert = function(value) {
   var childTree = BinarySearchTree(value);
 
-  var test = function(child, node) {
+  var add = function(child, node) {
     if (child.value < node.value) {
       if (node.left === null) {
         node.left = child;
       } else {
-        return test(child, node.left);
+        return add(child, node.left);
       }
     } else {
       if (node.right === null) {
         node.right = child;
       } else {
-        return test(child, node.right);
+        return add(child, node.right);
       }
     };
   };
 
-  test(childTree, this);
+  add(childTree, this);
 };
 
 BinarySearchTree.prototype.contains = function(target) {
